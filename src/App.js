@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Filter } from './components/filtro';
 
 const Div = styled.div`
     margin: 0;
@@ -16,7 +17,6 @@ const Header = styled.header`
 `
 const Main = styled.main`
     padding: 20px;
-    background-color: blue;
     display: grid;
     grid-template: 
     'filtro  produto';
@@ -40,7 +40,23 @@ const Footer = styled.footer`
     background-color: #2aa53a;
 `
 class App extends React.Component {
-
+ state ={
+   minFilter:100,
+   maxFilter:1000,
+   nameFilter:'produto',
+  //  productsInCart:[
+     
+  //  ] 
+ }
+ onChangeMinFilter = (event) =>{
+   this.setState({minFilter: event.target.value})
+ }
+ onChangeMaxFilter = (event) =>{
+   this.setState({maxFilter: event.target.value})
+ }
+ onChangeNameFilter= (event) =>{
+   this.setState({nameFilter: event.target.value})
+ }
   render() {
 
     return (
@@ -50,8 +66,15 @@ class App extends React.Component {
         </Header>
         <Main>
 
-          <Filtro>
-          </Filtro>
+          <Filter
+            minFilter={this.state.minFilter}
+            maxFilter={this.state.maxFilter}
+            nameFilter={this.state.nameFilter}
+              onChangeMinFilter={this.onChangeMinFilter}
+              onChangeMaxFilter={this.onChangeMaxFilter}
+              onChangeNameFilter={this.onChangeNameFilter}    
+               
+          />
           <Produtos>
           </Produtos>
         </Main>
