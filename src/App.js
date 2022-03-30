@@ -21,11 +21,7 @@ const Main = styled.main`
     grid-template: 
     'filtro  produto';
 `
-const Filtro = styled.div`
-    padding: 20px;
-    background-color: yellow;
-    grid-area: filtro;
-`
+
 const Produtos = styled.div`
     padding: 20px;
     background-color: #ff00b3;
@@ -41,8 +37,8 @@ const Footer = styled.footer`
 `
 class App extends React.Component {
  state ={
-   minFilter:100,
-   maxFilter:1000,
+   minFilter:100,//valor minimo
+   maxFilter:1000,//valor maximo
    nameFilter:'produto',
   //  productsInCart:[
      

@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components'
-
+const ContainerFiltro = styled.div`
+    padding: 20px;
+    background-color: yellow;
+    grid-area: filtro;
+    width:fit-content;
+`
 
 export class Filter extends React.Component {
    
@@ -8,7 +13,7 @@ export class Filter extends React.Component {
         return (
 
 
-            <div>
+            <ContainerFiltro>
                 <h3>filtro:</h3>
                 <p>Valor mínimo:</p>
                 <input 
@@ -26,7 +31,7 @@ export class Filter extends React.Component {
                 <p>Busca por nome:</p>
                 <input/>
 
-            </div>
+            </ContainerFiltro>
 
         )
     }
