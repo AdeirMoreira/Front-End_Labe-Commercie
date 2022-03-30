@@ -39,19 +39,22 @@ class App extends React.Component {
  state ={
    minFilter:100,//valor minimo
    maxFilter:1000,//valor maximo
-   nameFilter:'produto',
+   nameFilter:'',
   //  productsInCart:[
      
   //  ] 
  }
  onChangeMinFilter = (event) =>{
    this.setState({minFilter: event.target.value})
+   
  }
  onChangeMaxFilter = (event) =>{
    this.setState({maxFilter: event.target.value})
+   
  }
  onChangeNameFilter= (event) =>{
    this.setState({nameFilter: event.target.value})
+   console.log(this.state.nameFilter)
  }
   render() {
 

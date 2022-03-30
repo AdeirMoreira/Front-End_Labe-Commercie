@@ -29,7 +29,11 @@ export class Filter extends React.Component {
                 onChange = {this.props.onChangeMaxFilter}/>
                
                 <p>Busca por nome:</p>
-                <input/>
+                <input
+                type= "text"
+                value= {this.props.nameFilter}
+                onChange={this.props.onChangeNameFilter}
+                />
 
             </ContainerFiltro>
 
