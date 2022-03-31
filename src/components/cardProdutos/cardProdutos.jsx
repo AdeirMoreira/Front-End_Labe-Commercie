@@ -54,11 +54,11 @@ export class CardProdutos extends React.Component {
 
         return (
             <ContainerCard>
-                <img src={this.props.foto} />
+                <img src={this.props.foto} alt={`foto da ${this.props.nomeDoProduto}`} />
                 <div>
                     <span>{this.props.nomeDoProduto}</span>
                     <span>R${this.props.preco}</span>
-                    <button>Comprar</button>
+                    <button onClick={() => this.props.addProdutoCarrinho(this.props.produtoID)}>Comprar</button>
                 </div>
 
             </ContainerCard>
