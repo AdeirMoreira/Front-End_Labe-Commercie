@@ -35,10 +35,10 @@ const Header = styled.header`
     background-color: aqua;
 `
 const Main = styled.main`
-    padding: 20px;
     display: grid;
     grid-template: 
-    'filtro  produto';
+    'filtro  produto ...'
+    /200px auto 200px;
 `
 
 const Carrinho = styled.div`
@@ -50,11 +50,6 @@ const Footer = styled.footer`
     background-color: #2aa53a;
 `
 class App extends React.Component {
-
-
-
-
-
   arrayDeProdutos = [
     {
       nome: 'New Horizons',
@@ -131,26 +126,25 @@ class App extends React.Component {
   ]
 
 
- state ={
-   minFilter:100,//valor minimo
-   maxFilter:1000,//valor maximo
-   nameFilter:'',
-  //  productsInCart:[
-     
-  //  ] 
- }
- onChangeMinFilter = (event) =>{
-   this.setState({minFilter: event.target.value})
-   
- }
- onChangeMaxFilter = (event) =>{
-   this.setState({maxFilter: event.target.value})
-   
- }
- onChangeNameFilter= (event) =>{
-   this.setState({nameFilter: event.target.value})
-   console.log(this.state.nameFilter)
- }
+  state = {
+    minFilter: '',
+    maxFilter: '',
+    nameFilter: '',
+    productsInCart: [
+
+    ]
+  }
+  onChangeMinFilter = (event) => {
+    this.setState({ minFilter: event.target.value })
+
+  }
+  onChangeMaxFilter = (event) => {
+    this.setState({ maxFilter: event.target.value })
+    console.log(this.state.maxFilter)
+  }
+  onChangeNameFilter = (event) => {
+    this.setState({ nameFilter: event.target.value })
+  }
 
   render() {
 
@@ -166,9 +160,9 @@ class App extends React.Component {
             minFilter={this.state.minFilter}
             maxFilter={this.state.maxFilter}
             nameFilter={this.state.nameFilter}
-              onChangeMinFilter={this.onChangeMinFilter}
-              onChangeMaxFilter={this.onChangeMaxFilter}
-              onChangeNameFilter={this.onChangeNameFilter}    
+            onChangeMinFilter={this.onChangeMinFilter}
+            onChangeMaxFilter={this.onChangeMaxFilter}
+            onChangeNameFilter={this.onChangeNameFilter}
           />
           <Produtos arrayDeProdutos={this.arrayDeProdutos} />
         </Main>

@@ -9,8 +9,8 @@ const ProdutosContainer = styled.div`
     padding: 20px;
     grid-area: produto;
     display: grid;
-    grid-template-columns: repeat(auto-fit , minmax(220px, 280px));
-    gap: 10px;
+    grid-template-columns: repeat(auto-fit , minmax(220px, 260px));
+    gap: 20px;
     font-family: 'Roboto', sans-serif;
 
 `
@@ -25,10 +25,10 @@ export class Produtos extends React.Component {
 
 
         return (
-            <ProdutosContainer>
+            <ProdutosContainer >
                 {this.props.arrayDeProdutos.map(produto => {
                     return (
-                        <CardProdutos
+                        <CardProdutos key={produto.id}
                             foto={produto.foto}
                             nomeDoProduto={produto.nome}
                             preco={produto.preco}

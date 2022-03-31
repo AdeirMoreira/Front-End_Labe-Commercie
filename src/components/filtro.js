@@ -4,11 +4,13 @@ const ContainerFiltro = styled.div`
     padding: 20px;
     background-color: yellow;
     grid-area: filtro;
-    width:fit-content;
+    input {
+        width: 150px;
+    }
 `
 
 export class Filter extends React.Component {
-   
+
     render() {
         return (
 
@@ -16,23 +18,23 @@ export class Filter extends React.Component {
             <ContainerFiltro>
                 <h3>filtro:</h3>
                 <p>Valor mínimo:</p>
-                <input 
-                type="number" 
-                value={this.props.minFilter} 
-                onChange = {this.props.onChangeMinFilter} 
+                <input
+                    type="number"
+                    value={this.props.minFilter}
+                    onChange={this.props.onChangeMinFilter}
                 />
                 <p>Valor máximo:</p>
                 <input
-                
-                type="number"
-                value = {this.props.maxFilter} 
-                onChange = {this.props.onChangeMaxFilter}/>
-               
+
+                    type="number"
+                    value={this.props.maxFilter}
+                    onChange={this.props.onChangeMaxFilter} />
+
                 <p>Busca por nome:</p>
                 <input
-                type= "text"
-                value= {this.props.nameFilter}
-                onChange={this.props.onChangeNameFilter}
+                    type="text"
+                    value={this.props.nameFilter}
+                    onChange={this.props.onChangeNameFilter}
                 />
 
             </ContainerFiltro>
