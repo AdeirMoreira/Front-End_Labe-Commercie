@@ -118,7 +118,7 @@ class App extends React.Component {
       id: 11
     },
     {
-      nome: 'Space X Crew Dragon 2',
+      nome: 'SpaceX Crew Dragon 2',
       foto: SpaceXCrewDragon2,
       preco: 25000,
       id: 12
@@ -140,12 +140,18 @@ class App extends React.Component {
   }
   onChangeMaxFilter = (event) => {
     this.setState({ maxFilter: event.target.value })
-    console.log(this.state.maxFilter)
   }
   onChangeNameFilter = (event) => {
     this.setState({ nameFilter: event.target.value })
   }
-
+  onClickAddProdutoCarrinho = (produtoID) => {
+    console.log(produtoID)
+  }
+  onClickLimpaFiltro = () => {
+    this.setState({ minFilter: '' })
+    this.setState({ maxFilter: '' })
+    this.setState({ nameFilter: '' })
+  }
   render() {
 
     return (
@@ -164,7 +170,14 @@ class App extends React.Component {
             onChangeMaxFilter={this.onChangeMaxFilter}
             onChangeNameFilter={this.onChangeNameFilter}
           />
-          <Produtos arrayDeProdutos={this.arrayDeProdutos} />
+          <Produtos
+            arrayDeProdutos={this.arrayDeProdutos}
+            minFilter={this.state.minFilter}
+            maxFilter={this.state.maxFilter}
+            nameFilter={this.state.nameFilter}
+            addProdutoCarrinho={this.onClickAddProdutoCarrinho}
+            limpaFiltro={this.onClickLimpaFiltro}
+          />
         </Main>
         <Footer></Footer>
       </Div>
