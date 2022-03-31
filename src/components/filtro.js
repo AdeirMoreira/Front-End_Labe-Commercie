@@ -1,12 +1,15 @@
 import React from 'react';
 import styled from 'styled-components'
+
+
 const ContainerFiltro = styled.div`
+    color:white;
     padding: 20px;
-    background-color: yellow;
     grid-area: filtro;
     input {
         width: 150px;
     }
+
 `
 
 export class Filter extends React.Component {

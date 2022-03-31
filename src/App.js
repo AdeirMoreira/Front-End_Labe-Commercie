@@ -19,7 +19,7 @@ import SpaceXCrewDragon2 from './img/SpaceX Crew Dragon 2.jpg'
 import { Produtos } from './components/produtos/produtos';
 
 import { Filter } from './components/filtro';
-
+import { Footer } from './components/footer';
 
 const Div = styled.div`
     margin: 0;
@@ -29,25 +29,33 @@ const Div = styled.div`
     list-style: none;
     display: flex;
     flex-direction: column;
+    background-image:url(https://files.passeidireto.com/d44c9464-c89d-4600-b8a6-5dd3dc6c9d1c/d44c9464-c89d-4600-b8a6-5dd3dc6c9d1c.jpeg);
+    background-repeat: no-repeat;    
+    background-size: cover;
+    background-attachment: fixed;
 `
 const Header = styled.header`
     padding: 20px;
-    background-color: aqua;
+    
 `
 const Main = styled.main`
     display: grid;
-    grid-template: 
+      grid-template: 
     'filtro  produto ...'
     /200px auto 200px;
+    align-items: start;
+    @media screen and (min-width: 120px) and (max-width: 480px) {
+    grid-template:
+    "filtro"
+    "produto";
+    justify-content: center;
+
+    }
 `
 
 const Carrinho = styled.div`
     padding: 20px;
-    background-color: red;
-`
-const Footer = styled.footer`
-    padding: 20px;
-    background-color: #2aa53a;
+    
 `
 class App extends React.Component {
   arrayDeProdutos = [
@@ -172,14 +180,19 @@ class App extends React.Component {
           />
           <Produtos
             arrayDeProdutos={this.arrayDeProdutos}
+
+
             minFilter={this.state.minFilter}
             maxFilter={this.state.maxFilter}
             nameFilter={this.state.nameFilter}
             addProdutoCarrinho={this.onClickAddProdutoCarrinho}
             limpaFiltro={this.onClickLimpaFiltro}
+
           />
         </Main>
-        <Footer></Footer>
+        <Footer>
+
+        </Footer>
       </Div>
     )
   }
