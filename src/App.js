@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import './App.css'
 
 import Voyager1 from './img/Voyager.jpg'
@@ -16,6 +17,9 @@ import SaturnoV from './img/Saturno V.jpg'
 import SpaceXCrewDragon2 from './img/SpaceX Crew Dragon 2.jpg'
 
 import { Produtos } from './components/produtos/produtos';
+
+import { Filter } from './components/filtro';
+
 
 const Div = styled.div`
     margin: 0;
@@ -36,11 +40,6 @@ const Main = styled.main`
     grid-template: 
     'filtro  produto';
 `
-const Filtro = styled.div`
-    padding: 20px;
-    background-color: yellow;
-    grid-area: filtro;
-`
 
 const Carrinho = styled.div`
     padding: 20px;
@@ -51,6 +50,7 @@ const Footer = styled.footer`
     background-color: #2aa53a;
 `
 class App extends React.Component {
+
 
 
 
@@ -130,6 +130,28 @@ class App extends React.Component {
     }
   ]
 
+
+ state ={
+   minFilter:100,//valor minimo
+   maxFilter:1000,//valor maximo
+   nameFilter:'',
+  //  productsInCart:[
+     
+  //  ] 
+ }
+ onChangeMinFilter = (event) =>{
+   this.setState({minFilter: event.target.value})
+   
+ }
+ onChangeMaxFilter = (event) =>{
+   this.setState({maxFilter: event.target.value})
+   
+ }
+ onChangeNameFilter= (event) =>{
+   this.setState({nameFilter: event.target.value})
+   console.log(this.state.nameFilter)
+ }
+
   render() {
 
     return (
@@ -140,9 +162,14 @@ class App extends React.Component {
           </Carrinho>
         </Header>
         <Main>
-          <Filtro>
-
-          </Filtro>
+          <Filter
+            minFilter={this.state.minFilter}
+            maxFilter={this.state.maxFilter}
+            nameFilter={this.state.nameFilter}
+              onChangeMinFilter={this.onChangeMinFilter}
+              onChangeMaxFilter={this.onChangeMaxFilter}
+              onChangeNameFilter={this.onChangeNameFilter}    
+          />
           <Produtos arrayDeProdutos={this.arrayDeProdutos} />
         </Main>
         <Footer></Footer>
