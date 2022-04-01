@@ -20,17 +20,50 @@ const ConteinerOrdenacao = styled.div`
     justify-content: space-around;
     padding: 10px 0px 0px;
     button {
-        font-size: 15px;
+        box-shadow:inset 0px 1px 0px 0px #fff6af;
+	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+	background-color:#ffec64;
+	border-radius:6px;
+	border:1px solid #ffaa22;
+	display:inline-block;
+	cursor:pointer;
+	color:#333333;
+	font-family:Arial;
+	font-size:13px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffee66;
+       
+       
+        /* font-size: 15px;
         background-color: #f9f9f1;
         font-weight: 700;
-        background-color: #c4ff0d;
+        background-color: #c4ff0d; */
     }
     label {
+       color: #f9f9f1;
         font-size: 20px;
         font-weight: bold;
         select {
-            font-size: 18px;
-            background-color: #c4ff0d;
+           
+            box-shadow:inset 0px 1px 0px 0px #fff6af;
+	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+	background-color:#ffec64;
+	border-radius:6px;
+	border:1px solid #ffaa22;
+	display:inline-block;
+	cursor:pointer;
+	color:#333333;
+	font-family:Arial;
+	font-size:13px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffee66;
+           
+            /* font-size: 18px;
+            background-color: #c4ff0d; */
             option {
             font-size: 15px;
             background-color: #f9f9f1;
