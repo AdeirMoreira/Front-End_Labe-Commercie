@@ -20,17 +20,35 @@ const ConteinerOrdenacao = styled.div`
     justify-content: space-around;
     padding: 10px 0px 0px;
     button {
-        font-size: 15px;
-        background-color: #f9f9f1;
-        font-weight: 700;
-        background-color: #c4ff0d;
+        background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
+        background-color:#79bbff;
+        border-radius:6px;
+        cursor:pointer;
+        font-size:20px;
+        font-weight:bold;
+    }
+    button:hover {
+        background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+        background-color:#ffab23;
+    }
+    button:active {
+        position:relative;
+        top:1px;
     }
     label {
-        font-size: 20px;
+        font-size: 25px;
         font-weight: bold;
+        color: #f9f9f1;
         select {
-            font-size: 18px;
-            background-color: #c4ff0d;
+            box-shadow:inset 0px 1px 0px 0px #fff6af;
+            background-color:#ffec64;
+            border-radius:6px;
+            border:1px solid #ffaa22;
+            font-size:20px;
+            font-weight:bold;
+            text-shadow:0px 1px 0px #ffee66;
+            background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
+            margin-left: 10px;
             option {
             font-size: 15px;
             background-color: #f9f9f1;
@@ -46,7 +64,6 @@ export class Produtos extends React.Component {
         ordenacao: 'titulo',
         classificacao: 1
     }
-
     onChageOrendenação = (event) => {
         this.setState({ ordenacao: event.target.value })
     }

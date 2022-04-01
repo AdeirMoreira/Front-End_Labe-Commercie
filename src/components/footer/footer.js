@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components"
 
-import Facebook from "./imgFoter/facebook.png"
-import Instagram from "./imgFoter/instagram.png"
-import Twitter from "./imgFoter/twitter.png"
+import Twitter from "../imgFoter/twitter.png"
+import Facebook from "../imgFoter/facebook.png"
+import Instagram from "../imgFoter/instagram.png"
 
 
 

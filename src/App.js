@@ -17,8 +17,8 @@ import SpaceXCrewDragon2 from './img/SpaceX Crew Dragon 2.jpg'
 
 import { Produtos } from './components/produtos/produtos';
 
-import { Filter } from './components/filtro';
-import { Footer } from './components/footer';
+import { Filter } from './components/filtro/filtro';
+import { Footer } from './components/footer/footer';
 
 const Div = styled.div`
     margin: 0;
@@ -180,6 +180,17 @@ class App extends React.Component {
       const novoProdutoNoCarrinho = [...this.state.productsInCart, { ...produtoAdcionado, quantidade: 1 }]
       this.setState({ productsInCart: novoProdutoNoCarrinho })
     }
+  }
+  onClickRemoveProduto = (produtoID) => {
+    const produtoRemovido = this.state.productsInCart.map(produto => {
+      if (produto.id === produtoID) {
+        return {
+          ...produto, quantidade: produto.quantidade - 1
+        }
+      }
+      return produto
+    }).filter(produto => produto.quantidade > 0)
+    this.setState({ productsInCart: produtoRemovido })
   }
   onClickLimpaFiltro = () => {
     this.setState({ minFilter: '' })
