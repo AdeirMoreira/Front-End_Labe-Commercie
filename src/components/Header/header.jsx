@@ -8,6 +8,7 @@ color: #8BCB96;
 padding: 20px;
 display: flex;
 flex-direction: row;
+flex-wrap: wrap;
 justify-content: center;
 gap: 25px;
 img{
@@ -25,9 +26,7 @@ export default function Header() {
     return (
         <ContainerHeader>
             <img src={Ufo} alt="Logo" />
-           
             <h1>Alpha Geek Squad</h1>
-           
         </ContainerHeader>
     )
 
