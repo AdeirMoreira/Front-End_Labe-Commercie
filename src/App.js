@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import './App.css'
 
+
 import Voyager1 from './img/Voyager.jpg'
 import Sputnik from './img/Sputnik.jpg'
 import Cassini from './img/Cassini.webp'
@@ -20,6 +21,7 @@ import { Produtos } from './components/produtos/produtos';
 
 import { Filter } from './components/filtro';
 
+import  Carrinho from './components/Carrinho/Carrinho';
 
 const Div = styled.div`
     margin: 0;
@@ -37,14 +39,10 @@ const Header = styled.header`
 const Main = styled.main`
     display: grid;
     grid-template: 
-    'filtro  produto ...'
-    /200px auto 200px;
+    'filtro  produto carrinho'
+    /200px auto 280px;
 `
 
-const Carrinho = styled.div`
-    padding: 20px;
-    background-color: red;
-`
 const Footer = styled.footer`
     padding: 20px;
     background-color: #2aa53a;
@@ -55,73 +53,73 @@ class App extends React.Component {
       nome: 'New Horizons',
       foto: NewHorizons,
       preco: 7000,
-      id: 5
+      id: 5,
     },
     {
       nome: 'Voyager1',
       foto: Voyager1,
       preco: 5000,
-      id: 1
+      id: 1,
     },
     {
       nome: 'Hubble',
       foto: Hubble,
       preco: 15000,
-      id: 8
+      id: 8,
     },
     {
       nome: 'Sputnik',
       foto: Sputnik,
       preco: 3000,
-      id: 2
+      id: 2,
     },
     {
       nome: 'Cassini',
       foto: Cassini,
       preco: 5000,
-      id: 3
+      id: 3,
     },
     {
       nome: 'Onibus Espacial Challenger',
       foto: Challenger,
       preco: 20000,
-      id: 10
+      id: 10,
     },
     {
       nome: 'Galileo',
       foto: Galileo,
       preco: 5000,
-      id: 4
+      id: 4,
     },
     {
       nome: 'Módulo Lunar Apollo',
       foto: ModuloLunarApollo,
       preco: 4000,
-      id: 6
+      id: 6,
     },
     {
       nome: 'Opportunity',
       foto: Opportunity,
       preco: 10000,
-      id: 7
+      id: 7,
     },
     {
       nome: 'Estação Espacial Internacional',
       foto: EstacaoEspacialInternacional,
       preco: 12000,
-      id: 9
+      id: 9,
     },
     {
       nome: 'Saturno V',
       foto: SaturnoV,
       preco: 10000,
-      id: 11
+      id: 11,
     },
     {
       nome: 'Space X Crew Dragon 2',
       foto: SpaceXCrewDragon2,
       preco: 25000,
-      id: 12
+      id: 12,
     }
   ]
 
@@ -130,9 +128,10 @@ class App extends React.Component {
     minFilter: '',
     maxFilter: '',
     nameFilter: '',
-    productsInCart: [
-
-    ]
+    peloNome: 'Traje Espacial',
+    produtos: this.arrayDeProdutos,
+    produtosNoCarrinho: [],
+    total: 0,
   }
   onChangeMinFilter = (event) => {
     this.setState({ minFilter: event.target.value })
@@ -146,14 +145,67 @@ class App extends React.Component {
     this.setState({ nameFilter: event.target.value })
   }
 
+  adicionarAoCarrinho = (produtoId) => {
+    const produtoExistenteCarrinho = this.state.produtosNoCarrinho.find(
+      (produto) => produtoId === produto.id,
+    );
+
+    if (produtoExistenteCarrinho) {
+      const novosProdutosCarrinho = this.state.produtosNoCarrinho.map((produto) =>
+        produtoId === produto.id ? { ...produto, quantidade: produto.quantidade + 1 } : produto,
+      );
+
+      const total = novosProdutosCarrinho.reduce(
+        (total, produto) => total + produto.preco * produto.quantidade,
+        0,
+      );
+
+      this.setState({
+        produtosNoCarrinho: novosProdutosCarrinho,
+        total: total,
+      });
+    } else {
+      const novoProdutoCarrinho = this.state.produtos.find((produto) => produtoId === produto.id);
+
+      const novosProdutosCarrinho = [
+        ...this.state.produtosNoCarrinho,
+        { ...novoProdutoCarrinho, quantidade: 1 },
+      ];
+
+      const total = novosProdutosCarrinho.reduce(
+        (total, produto) => total + produto.preco * produto.quantidade,
+        0,
+      );
+
+      this.setState({
+        produtosNoCarrinho: novosProdutosCarrinho,
+        total: total,
+      });
+    }
+  };
+
+  removerDoCarrinho = (produtoId) => {
+    const removerProduto = this.state.produtosNoCarrinho
+      .map((produto) =>
+        produtoId === produto.id ? { ...produto, quantidade: produto.quantidade - 1 } : produto,
+      )
+      .filter((produto) => produto.quantidade > 0);
+
+    const total = removerProduto.reduce(
+      (total, produto) => total + produto.preco * produto.quantidade,
+      0,
+    );
+
+    this.setState({ produtosNoCarrinho: removerProduto, total: total });
+  };
+
+
   render() {
 
     return (
       <Div>
-        <Header>
-          <Carrinho>
-
-          </Carrinho>
+        <Header>  
+        
         </Header>
         <Main>
           <Filter
@@ -165,6 +217,11 @@ class App extends React.Component {
             onChangeNameFilter={this.onChangeNameFilter}
           />
           <Produtos arrayDeProdutos={this.arrayDeProdutos} />
+          <Carrinho
+          produtosCarrinho={this.state.produtosNoCarrinho}
+          total={this.state.total}
+          removerDoCarrinho={this.removerDoCarrinho}
+        />
         </Main>
         <Footer></Footer>
       </Div>

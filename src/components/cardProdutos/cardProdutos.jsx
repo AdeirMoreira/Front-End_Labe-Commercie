@@ -46,7 +46,16 @@ const ContainerCard = styled.div`
     }
     
 `
-
+const Button = styled.button `
+margin-bottom: 12px;
+border-radius: 10px;
+border: none;
+padding: 10px;
+cursor: pointer;
+&:hover {
+background-color: lightgrey;
+}
+`
 
 
 export class CardProdutos extends React.Component {
@@ -58,7 +67,9 @@ export class CardProdutos extends React.Component {
                 <div>
                     <span>{this.props.nomeDoProduto}</span>
                     <span>R${this.props.preco}</span>
-                    <button>Comprar</button>
+                    <Button onClick={() => this.props.adicionarAoCarrinho(this.props.produtos.id)}>
+                    Adicionar
+                    </Button>
                 </div>
 
             </ContainerCard>
