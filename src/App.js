@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 
+
 import Voyager1 from './img/Voyager.jpg'
 import Sputnik from './img/Sputnik.jpg'
 import Cassini from './img/Cassini.webp'
@@ -17,8 +18,12 @@ import SpaceXCrewDragon2 from './img/SpaceX Crew Dragon 2.jpg'
 
 import { Produtos } from './components/produtos/produtos';
 
+
 import { Filter } from './components/filtro/filtro';
 import { Footer } from './components/footer/footer';
+import  Carrinho from './components/Carrinho/Carrinho';
+
+
 
 const Div = styled.div`
     margin: 0;
@@ -38,21 +43,22 @@ const Main = styled.main`
     flex: 1 0 auto;
     display: grid;
     grid-template: 
-    'filtro  produto ...'
-    /200px auto 200px;
-    @media screen and (max-width: 480px) {
+
+    'filtro  produto carrinho'
+    /200px auto 280px;
+     @media screen and (max-width: 480px) {
     grid-template:
+    "carrinho"
     "filtro"
     "produto";
     justify-content: center;
 
-    }
 `
 
-const Carrinho = styled.div`
-    padding: 20px;
+
     
-`
+
+
 class App extends React.Component {
   arrayDeProdutos = [
     {
@@ -146,13 +152,12 @@ class App extends React.Component {
     minFilter: '',
     maxFilter: '',
     nameFilter: '',
+    produtosNoCarrinho: [],
+    total: 0,
     productsInCart: [{
-      nome: 'Cassini',
-      foto: Cassini,
-      preco: 5000,
-      id: 3,
-      quantidade: 1
+      
     }]
+
   }
   onChangeMinFilter = (event) => {
     this.setState({ minFilter: event.target.value })
@@ -164,34 +169,95 @@ class App extends React.Component {
   onChangeNameFilter = (event) => {
     this.setState({ nameFilter: event.target.value })
   }
-  onClickAddProdutoCarrinho = (produtoID) => {
-    const produppNoCarrinho = this.state.productsInCart.find(prduto => prduto.id === produtoID)
-    if (produppNoCarrinho) {
-      const novoProdutoNoCarrinho = this.state.productsInCart.map(produto => {
-        if (produto.id === produtoID) {
-          return { ...produto, quantidade: produto.quantidade + 1 }
-        }
-        return produto
-      })
-      this.setState({ productsInCart: novoProdutoNoCarrinho })
+
+  adicionarAoCarrinho = (produtoId) => {
+    const produtoExistenteCarrinho = this.state.produtosNoCarrinho.find(
+      (produto) => produtoId === produto.id,
+    );
+
+    if (produtoExistenteCarrinho) {
+      const novosProdutosCarrinho = this.state.produtosNoCarrinho.map((produto) =>
+        produtoId === produto.id ? { ...produto, quantidade: produto.quantidade + 1 } : produto,
+      );
+
+      const total = novosProdutosCarrinho.reduce(
+        (total, produto) => total + produto.preco * produto.quantidade,
+        0,
+      );
+
+      this.setState({
+        produtosNoCarrinho: novosProdutosCarrinho,
+        total: total,
+      });
+    } else {
+      const novoProdutoCarrinho = this.state.produtos.find((produto) => produtoId === produto.id);
+
+      const novosProdutosCarrinho = [
+        ...this.state.produtosNoCarrinho,
+        { ...novoProdutoCarrinho, quantidade: 1 },
+      ];
+
+      const total = novosProdutosCarrinho.reduce(
+        (total, produto) => total + produto.preco * produto.quantidade,
+        0,
+      );
+
+      this.setState({
+        produtosNoCarrinho: novosProdutosCarrinho,
+        total: total,
+      });
     }
-    else {
-      const produtoAdcionado = this.arrayDeProdutos.find(prduto => prduto.id === produtoID)
-      const novoProdutoNoCarrinho = [...this.state.productsInCart, { ...produtoAdcionado, quantidade: 1 }]
-      this.setState({ productsInCart: novoProdutoNoCarrinho })
-    }
+
   }
-  onClickRemoveProduto = (produtoID) => {
-    const produtoRemovido = this.state.productsInCart.map(produto => {
-      if (produto.id === produtoID) {
-        return {
-          ...produto, quantidade: produto.quantidade - 1
-        }
-      }
-      return produto
-    }).filter(produto => produto.quantidade > 0)
-    this.setState({ productsInCart: produtoRemovido })
-  }
+//   onClickRemoveProduto = (produtoID) => {
+//     const produtoRemovido = this.state.productsInCart.map(produto => {
+//       if (produto.id === produtoID) {
+//         return {
+//           ...produto, quantidade: produto.quantidade - 1
+//         }
+//       }
+//       return produto
+//     }).filter(produto => produto.quantidade > 0)
+//     this.setState({ productsInCart: produtoRemovido })
+//   }
+
+  };
+
+  removerDoCarrinho = (produtoId) => {
+    const removerProduto = this.state.produtosNoCarrinho
+      .map((produto) =>
+        produtoId === produto.id ? { ...produto, quantidade: produto.quantidade - 1 } : produto,
+      )
+      .filter((produto) => produto.quantidade > 0);
+
+    const total = removerProduto.reduce(
+      (total, produto) => total + produto.preco * produto.quantidade,
+      0,
+    );
+
+    this.setState({ produtosNoCarrinho: removerProduto, total: total });
+  };
+
+
+
+//   onClickAddProdutoCarrinho = (produtoID) => {
+//     const produppNoCarrinho = this.state.productsInCart.find(prduto => prduto.id === produtoID)
+//     if (produppNoCarrinho) {
+//       const novoProdutoNoCarrinho = this.state.productsInCart.map(produto => {
+//         if (produto.id === produtoID) {
+//           return { ...produto, quantidade: produto.quantidade + 1 }
+//         }
+//         return produto
+//       })
+//       this.setState({ productsInCart: novoProdutoNoCarrinho })
+//     }
+//     else {
+//       const produtoAdcionado = this.arrayDeProdutos.find(prduto => prduto.id === produtoID)
+//       const novoProdutoNoCarrinho = [...this.state.productsInCart, { ...produtoAdcionado, quantidade: 1 }]
+//       this.setState({ productsInCart: novoProdutoNoCarrinho })
+//     }
+//   }
+
   onClickLimpaFiltro = () => {
     this.setState({ minFilter: '' })
     this.setState({ maxFilter: '' })
@@ -201,9 +267,7 @@ class App extends React.Component {
 
     return (
       <Div>
-        <Header>
-          <Carrinho>
-          </Carrinho>
+        <Header>  
         </Header>
         <Main>
           <Filter
@@ -219,9 +283,17 @@ class App extends React.Component {
             minFilter={this.state.minFilter}
             maxFilter={this.state.maxFilter}
             nameFilter={this.state.nameFilter}
-            addProdutoCarrinho={this.onClickAddProdutoCarrinho}
+            addProdutoCarrinho={this.adicionarAoCarrinho}
             limpaFiltro={this.onClickLimpaFiltro}
           />
+          <Carrinho
+          produtosCarrinho={this.state.produtosNoCarrinho}
+          total={this.state.total}
+          removerDoCarrinho={this.removerDoCarrinho}
+        />
+
+          
+
         </Main>
         <Footer />
       </Div>

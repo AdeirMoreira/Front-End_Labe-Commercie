@@ -20,6 +20,7 @@ const ConteinerOrdenacao = styled.div`
     justify-content: space-around;
     padding: 10px 0px 0px;
     button {
+
         background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
         background-color:#79bbff;
         border-radius:6px;
@@ -37,9 +38,11 @@ const ConteinerOrdenacao = styled.div`
     }
     label {
         font-size: 25px;
+
         font-weight: bold;
         color: #f9f9f1;
         select {
+
             box-shadow:inset 0px 1px 0px 0px #fff6af;
             background-color:#ffec64;
             border-radius:6px;
@@ -49,6 +52,7 @@ const ConteinerOrdenacao = styled.div`
             text-shadow:0px 1px 0px #ffee66;
             background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
             margin-left: 10px;
+
             option {
             font-size: 15px;
             background-color: #f9f9f1;

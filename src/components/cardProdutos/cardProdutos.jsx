@@ -54,6 +54,7 @@ const ContainerCard = styled.div`
     }
     
 `
+
 export class CardProdutos extends React.Component {
     render() {
         return (
