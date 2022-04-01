@@ -18,11 +18,12 @@ import SpaceXCrewDragon2 from './img/SpaceX Crew Dragon 2.jpg'
 
 import { Produtos } from './components/produtos/produtos';
 
-import { Filter } from './components/filtro';
 
-
+import { Filter } from './components/filtro/filtro';
+import { Footer } from './components/footer/footer';
 import  Carrinho from './components/Carrinho/Carrinho';
-import { Footer } from './components/footer';
+
+
 
 const Div = styled.div`
     margin: 0;
@@ -206,6 +207,20 @@ class App extends React.Component {
         total: total,
       });
     }
+
+  }
+//   onClickRemoveProduto = (produtoID) => {
+//     const produtoRemovido = this.state.productsInCart.map(produto => {
+//       if (produto.id === produtoID) {
+//         return {
+//           ...produto, quantidade: produto.quantidade - 1
+//         }
+//       }
+//       return produto
+//     }).filter(produto => produto.quantidade > 0)
+//     this.setState({ productsInCart: produtoRemovido })
+//   }
+
   };
 
   removerDoCarrinho = (produtoId) => {
@@ -242,6 +257,7 @@ class App extends React.Component {
 //       this.setState({ productsInCart: novoProdutoNoCarrinho })
 //     }
 //   }
+
   onClickLimpaFiltro = () => {
     this.setState({ minFilter: '' })
     this.setState({ maxFilter: '' })
