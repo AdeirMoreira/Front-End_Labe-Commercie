@@ -9,58 +9,54 @@ const ContainerCard = styled.div`
     max-width: 300px;
     width: 100%;
     border: 1px solid black;
-    background-color: #f9f9f1;
+    background-color: #E8FEFA;
     img {
         max-width: 300px;
         width: 100%;
         height: 250px;
     }
     div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 5px;
-        span:nth-child(1) {
-        font-size: 20px;
-        text-align: center;
+        flex-direction: column;
+        justify-content: center;
         padding: 5px;
-        font-weight: bold;
+        display: flex;
+        height: 150px;
+        justify-content: space-between;
+        span:nth-child(1) {
+            text-align: center;
+            padding: 5px;
+            font-weight: 700;
+            font-size: 25px;
         }
         span:nth-child(2) {
-        font-size: 20px;
-        text-align: center;
-        padding: 5px;
-        font-style: italic;
+            text-align: center;
+            padding: 5px;
+            font-style: italic;
         }
         button {
-        background-color: #c4ff0d;
-        font-size: 30px;
-        color: black;
-        width: fit-content;
-        margin: 0 auto;
-        font-weight: bolder;
-        width: 200px;
-        height: 50px;
-        border-radius: 10px;
+            margin: 0 auto;
+            border-radius:10px;
+            cursor:pointer;
+            font-size:25px;
+            font-weight:bold;
+            background:linear-gradient(to bottom, #79bbff 5%, #378de5 100%);
+            background-color:#79bbff;
+            border-radius:6px;
+        }
+        button:hover {
+            background-color:#ffab23;
+            background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
+        }
+        button:active {
+            top:1px;
+            position:relative;
         }
     }
     
 `
-const Button = styled.button `
-margin-bottom: 12px;
-border-radius: 10px;
-border: none;
-padding: 10px;
-cursor: pointer;
-&:hover {
-background-color: lightgrey;
-}
-`
-
 
 export class CardProdutos extends React.Component {
     render() {
-
         return (
             <ContainerCard>
                 <img src={this.props.foto} alt={`foto da ${this.props.nomeDoProduto}`} />
@@ -69,7 +65,6 @@ export class CardProdutos extends React.Component {
                     <span>R${this.props.preco}</span>
                     <button onClick={() => this.props.addProdutoCarrinho(this.props.produtoID)}>Comprar</button>
                 </div>
-
             </ContainerCard>
         )
     }
