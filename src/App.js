@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import './App.css'
 
 
 import Voyager1 from './img/Voyager.jpg'
@@ -21,7 +20,9 @@ import { Produtos } from './components/produtos/produtos';
 
 import { Filter } from './components/filtro';
 
+
 import  Carrinho from './components/Carrinho/Carrinho';
+import { Footer } from './components/footer';
 
 const Div = styled.div`
     margin: 0;
@@ -31,22 +32,32 @@ const Div = styled.div`
     list-style: none;
     display: flex;
     flex-direction: column;
+    height: 100vh;
 `
 const Header = styled.header`
     padding: 20px;
-    background-color: aqua;
+    
 `
 const Main = styled.main`
+    flex: 1 0 auto;
     display: grid;
     grid-template: 
+
     'filtro  produto carrinho'
     /200px auto 280px;
+     @media screen and (max-width: 480px) {
+    grid-template:
+    "carrinho"
+    "filtro"
+    "produto";
+    justify-content: center;
+
 `
 
-const Footer = styled.footer`
-    padding: 20px;
-    background-color: #2aa53a;
-`
+
+    
+
+
 class App extends React.Component {
   arrayDeProdutos = [
     {
@@ -54,72 +65,84 @@ class App extends React.Component {
       foto: NewHorizons,
       preco: 7000,
       id: 5,
+      quantidade: 0
     },
     {
       nome: 'Voyager1',
       foto: Voyager1,
       preco: 5000,
       id: 1,
+      quantidade: 0
     },
     {
       nome: 'Hubble',
       foto: Hubble,
       preco: 15000,
       id: 8,
+      quantidade: 0
     },
     {
       nome: 'Sputnik',
       foto: Sputnik,
       preco: 3000,
       id: 2,
+      quantidade: 0
     },
     {
       nome: 'Cassini',
       foto: Cassini,
       preco: 5000,
       id: 3,
+      quantidade: 0
     },
     {
       nome: 'Onibus Espacial Challenger',
       foto: Challenger,
       preco: 20000,
       id: 10,
+      quantidade: 0
     },
     {
       nome: 'Galileo',
       foto: Galileo,
       preco: 5000,
       id: 4,
+      quantidade: 0
     },
     {
       nome: 'Módulo Lunar Apollo',
       foto: ModuloLunarApollo,
       preco: 4000,
       id: 6,
+      quantidade: 0
     },
     {
       nome: 'Opportunity',
       foto: Opportunity,
       preco: 10000,
       id: 7,
+      quantidade: 0
     },
     {
       nome: 'Estação Espacial Internacional',
       foto: EstacaoEspacialInternacional,
       preco: 12000,
       id: 9,
+      quantidade: 0
     },
     {
       nome: 'Saturno V',
       foto: SaturnoV,
       preco: 10000,
       id: 11,
+      quantidade: 0
     },
     {
-      nome: 'Space X Crew Dragon 2',
+      nome: 'SpaceX Crew Dragon 2',
       foto: SpaceXCrewDragon2,
       preco: 25000,
       id: 12,
+      quantidade: 0
     }
   ]
 
@@ -128,10 +151,12 @@ class App extends React.Component {
     minFilter: '',
     maxFilter: '',
     nameFilter: '',
-    peloNome: 'Traje Espacial',
-    produtos: this.arrayDeProdutos,
     produtosNoCarrinho: [],
     total: 0,
+    productsInCart: [{
+      
+    }]
+
   }
   onChangeMinFilter = (event) => {
     this.setState({ minFilter: event.target.value })
@@ -139,7 +164,6 @@ class App extends React.Component {
   }
   onChangeMaxFilter = (event) => {
     this.setState({ maxFilter: event.target.value })
-    console.log(this.state.maxFilter)
   }
   onChangeNameFilter = (event) => {
     this.setState({ nameFilter: event.target.value })
@@ -200,12 +224,34 @@ class App extends React.Component {
   };
 
 
+
+//   onClickAddProdutoCarrinho = (produtoID) => {
+//     const produppNoCarrinho = this.state.productsInCart.find(prduto => prduto.id === produtoID)
+//     if (produppNoCarrinho) {
+//       const novoProdutoNoCarrinho = this.state.productsInCart.map(produto => {
+//         if (produto.id === produtoID) {
+//           return { ...produto, quantidade: produto.quantidade + 1 }
+//         }
+//         return produto
+//       })
+//       this.setState({ productsInCart: novoProdutoNoCarrinho })
+//     }
+//     else {
+//       const produtoAdcionado = this.arrayDeProdutos.find(prduto => prduto.id === produtoID)
+//       const novoProdutoNoCarrinho = [...this.state.productsInCart, { ...produtoAdcionado, quantidade: 1 }]
+//       this.setState({ productsInCart: novoProdutoNoCarrinho })
+//     }
+//   }
+  onClickLimpaFiltro = () => {
+    this.setState({ minFilter: '' })
+    this.setState({ maxFilter: '' })
+    this.setState({ nameFilter: '' })
+  }
   render() {
 
     return (
       <Div>
         <Header>  
-        
         </Header>
         <Main>
           <Filter
@@ -216,14 +262,24 @@ class App extends React.Component {
             onChangeMaxFilter={this.onChangeMaxFilter}
             onChangeNameFilter={this.onChangeNameFilter}
           />
-          <Produtos arrayDeProdutos={this.arrayDeProdutos} />
+          <Produtos
+            arrayDeProdutos={this.arrayDeProdutos}
+            minFilter={this.state.minFilter}
+            maxFilter={this.state.maxFilter}
+            nameFilter={this.state.nameFilter}
+            addProdutoCarrinho={this.adicionarAoCarrinho}
+            limpaFiltro={this.onClickLimpaFiltro}
+          />
           <Carrinho
           produtosCarrinho={this.state.produtosNoCarrinho}
           total={this.state.total}
           removerDoCarrinho={this.removerDoCarrinho}
         />
+
+          
+
         </Main>
-        <Footer></Footer>
+        <Footer />
       </Div>
     )
   }
