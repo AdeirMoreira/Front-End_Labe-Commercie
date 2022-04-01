@@ -55,11 +55,6 @@ const Main = styled.main`
     justify-content: center;
     }
 `
-
-
-
-
-
 class App extends React.Component {
   arrayDeProdutos = [
     {
@@ -155,10 +150,7 @@ class App extends React.Component {
     nameFilter: '',
     produtosNoCarrinho: [],
     total: 0,
-    productsInCart: [{
-
-    }]
-
+    // productsInCart: []
   }
   onChangeMinFilter = (event) => {
     this.setState({ minFilter: event.target.value })

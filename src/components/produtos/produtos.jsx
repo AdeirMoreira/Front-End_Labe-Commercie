@@ -4,7 +4,9 @@ import styled from "styled-components";
 
 
 
-
+const SuperContainer = styled.section`
+    grid-area: produto;
+`
 const ProdutosContainer = styled.div`
     padding: 20px;
     grid-area: produto;
@@ -88,7 +90,7 @@ export class Produtos extends React.Component {
         //destruturação do props
 
         return (
-            <div>
+            <SuperContainer>
                 <ConteinerOrdenacao>
                     <button onClick={this.chama2funcoes}>Limpar os Filtros </button>
                     <label htmlFor="Ordenacao">Ordenar por:
@@ -136,7 +138,7 @@ export class Produtos extends React.Component {
                         )
                     })}
                 </ProdutosContainer>
-            </div>
+            </SuperContainer>
         )
     }
 }
