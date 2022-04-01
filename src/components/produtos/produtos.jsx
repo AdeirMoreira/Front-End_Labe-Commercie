@@ -40,7 +40,7 @@ const ConteinerOrdenacao = styled.div`
         font-size: 25px;
 
         font-weight: bold;
-        color: #f9f9f1;
+        color: #8BCB96;
         select {
 
             box-shadow:inset 0px 1px 0px 0px #fff6af;

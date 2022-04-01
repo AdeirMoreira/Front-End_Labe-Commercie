@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
-  border: solid 1px black;
+  color: white;
   margin: 10px;
   padding: 10px;
-  background-color: white;
+  
 `;
 
 const ContainerFlex = styled.div`
