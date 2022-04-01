@@ -19,9 +19,13 @@ import SpaceXCrewDragon2 from './img/SpaceX Crew Dragon 2.jpg'
 import { Produtos } from './components/produtos/produtos';
 
 
+
+import Carrinho from './components/Carrinho/Carrinho';
+import { Footer } from './components/footer';
 import { Filter } from './components/filtro/filtro';
-import { Footer } from './components/footer/footer';
-import  Carrinho from './components/Carrinho/Carrinho';
+
+
+
 
 
 
@@ -46,17 +50,17 @@ const Main = styled.main`
 
     'filtro  produto carrinho'
     /200px auto 280px;
-     @media screen and (max-width: 480px) {
+    @media screen and (max-width: 480px) {
     grid-template:
-    "carrinho"
     "filtro"
+    "carrinho"
     "produto";
     justify-content: center;
-
+    }
 `
 
 
-    
+
 
 
 class App extends React.Component {
@@ -155,7 +159,7 @@ class App extends React.Component {
     produtosNoCarrinho: [],
     total: 0,
     productsInCart: [{
-      
+
     }]
 
   }
@@ -171,9 +175,7 @@ class App extends React.Component {
   }
 
   adicionarAoCarrinho = (produtoId) => {
-    const produtoExistenteCarrinho = this.state.produtosNoCarrinho.find(
-      (produto) => produtoId === produto.id,
-    );
+    const produtoExistenteCarrinho = this.state.produtosNoCarrinho.find((produto) => produtoId === produto.id,);
 
     if (produtoExistenteCarrinho) {
       const novosProdutosCarrinho = this.state.produtosNoCarrinho.map((produto) =>
@@ -190,20 +192,20 @@ class App extends React.Component {
         total: total,
       });
     } else {
-      const novoProdutoCarrinho = this.state.produtos.find((produto) => produtoId === produto.id);
+      const novoProdutoCarrinho = this.arrayDeProdutos.find((produto) => produtoId === produto.id);
 
-      const novosProdutosCarrinho = [
+      const novosProdutosCarrinhoAtualizados = [
         ...this.state.produtosNoCarrinho,
         { ...novoProdutoCarrinho, quantidade: 1 },
       ];
 
-      const total = novosProdutosCarrinho.reduce(
+      const total = novosProdutosCarrinhoAtualizados.reduce(
         (total, produto) => total + produto.preco * produto.quantidade,
         0,
       );
 
       this.setState({
-        produtosNoCarrinho: novosProdutosCarrinho,
+        produtosNoCarrinho: novosProdutosCarrinhoAtualizados,
         total: total,
       });
     }
@@ -240,23 +242,27 @@ class App extends React.Component {
 
 
 
-//   onClickAddProdutoCarrinho = (produtoID) => {
-//     const produppNoCarrinho = this.state.productsInCart.find(prduto => prduto.id === produtoID)
-//     if (produppNoCarrinho) {
-//       const novoProdutoNoCarrinho = this.state.productsInCart.map(produto => {
-//         if (produto.id === produtoID) {
-//           return { ...produto, quantidade: produto.quantidade + 1 }
-//         }
-//         return produto
-//       })
-//       this.setState({ productsInCart: novoProdutoNoCarrinho })
-//     }
-//     else {
-//       const produtoAdcionado = this.arrayDeProdutos.find(prduto => prduto.id === produtoID)
-//       const novoProdutoNoCarrinho = [...this.state.productsInCart, { ...produtoAdcionado, quantidade: 1 }]
-//       this.setState({ productsInCart: novoProdutoNoCarrinho })
-//     }
-//   }
+  // onClickAddProdutoCarrinho = (produtoID) => {
+  //   const produppNoCarrinho = this.state.productsInCart.find(prduto => prduto.id === produtoID)
+  //   if (produppNoCarrinho) {
+  //     const novoProdutoNoCarrinho = this.state.productsInCart.map(produto => {
+  //       if (produto.id === produtoID) {
+  //         return { ...produto, quantidade: produto.quantidade + 1 }
+  //       }
+  //       return produto
+  //     })
+  //     this.setState({ productsInCart: novoProdutoNoCarrinho })
+  //   }
+  //   else {
+  //     const produtoAdcionado = this.arrayDeProdutos.find(prduto => prduto.id === produtoID)
+  //     const novoProdutoNoCarrinho = [...this.state.productsInCart, { ...produtoAdcionado, quantidade: 1 }]
+  //     this.setState({ productsInCart: novoProdutoNoCarrinho })
+  //   }
+  // }
+
+
+
+
 
   onClickLimpaFiltro = () => {
     this.setState({ minFilter: '' })
@@ -267,7 +273,7 @@ class App extends React.Component {
 
     return (
       <Div>
-        <Header>  
+        <Header>
         </Header>
         <Main>
           <Filter
@@ -287,13 +293,10 @@ class App extends React.Component {
             limpaFiltro={this.onClickLimpaFiltro}
           />
           <Carrinho
-          produtosCarrinho={this.state.produtosNoCarrinho}
-          total={this.state.total}
-          removerDoCarrinho={this.removerDoCarrinho}
-        />
-
-          
-
+            produtosCarrinho={this.state.produtosNoCarrinho}
+            total={this.state.total}
+            removerDoCarrinho={this.removerDoCarrinho}
+          />
         </Main>
         <Footer />
       </Div>
