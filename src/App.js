@@ -192,7 +192,6 @@ class App extends React.Component {
       <Div>
         <Header>
           <Carrinho>
-
           </Carrinho>
         </Header>
         <Main>
