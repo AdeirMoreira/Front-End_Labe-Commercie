@@ -20,7 +20,7 @@ import { Produtos } from './components/produtos/produtos';
 import Carrinho from './components/Carrinho/Carrinho';
 import { Filter } from './components/filtro/filtro';
 import Footer from './components/footer/footer';
-
+import Header from './components/Header/header';
 
 
 
@@ -36,10 +36,7 @@ const Div = styled.div`
     flex-direction: column;
     height: 100vh;
 `
-const Header = styled.header`
-    padding: 20px;
-    
-`
+
 const Main = styled.main`
     flex: 1 0 auto;
     display: grid;
