@@ -46,7 +46,16 @@ const ContainerCard = styled.div`
     }
     
 `
-
+const Button = styled.button `
+margin-bottom: 12px;
+border-radius: 10px;
+border: none;
+padding: 10px;
+cursor: pointer;
+&:hover {
+background-color: lightgrey;
+}
+`
 
 
 export class CardProdutos extends React.Component {
