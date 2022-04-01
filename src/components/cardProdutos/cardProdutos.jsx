@@ -10,6 +10,7 @@ const ContainerCard = styled.div`
     width: 100%;
     border: 1px solid black;
     background-color: #E8FEFA;
+   
     img {
         max-width: 300px;
         width: 100%;
@@ -32,6 +33,7 @@ const ContainerCard = styled.div`
             text-align: center;
             padding: 5px;
             font-style: italic;
+            font-weight: bold;
         }
         button {
             margin: 0 auto;
