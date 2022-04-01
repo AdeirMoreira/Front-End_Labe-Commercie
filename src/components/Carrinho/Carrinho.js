@@ -5,7 +5,7 @@ const Container = styled.div`
   color: white;
   margin: 10px;
   padding: 10px;
-  
+  grid-area: carrinho;
 `;
 
 const ContainerFlex = styled.div`
