@@ -18,7 +18,7 @@ img{
     height: 50px;
 }
 `
-export function Footer() {
+export default function Footer() {
     return (
         <ContainerFooter>
             <a target="_blank" href="https://www.facebook.com/" rel="noopener noreferrer" > <img src={Facebook} alt={'Icone do Facebook'} /></a>
