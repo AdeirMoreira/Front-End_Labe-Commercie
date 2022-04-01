@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import './App.css'
 
 import Voyager1 from './img/Voyager.jpg'
 import Sputnik from './img/Sputnik.jpg'
@@ -29,22 +28,19 @@ const Div = styled.div`
     list-style: none;
     display: flex;
     flex-direction: column;
-    background-image:url(https://files.passeidireto.com/d44c9464-c89d-4600-b8a6-5dd3dc6c9d1c/d44c9464-c89d-4600-b8a6-5dd3dc6c9d1c.jpeg);
-    background-repeat: no-repeat;    
-    background-size: cover;
-    background-attachment: fixed;
+    height: 100vh;
 `
 const Header = styled.header`
     padding: 20px;
     
 `
 const Main = styled.main`
+    flex: 1 0 auto;
     display: grid;
-      grid-template: 
+    grid-template: 
     'filtro  produto ...'
     /200px auto 200px;
-    align-items: start;
-    @media screen and (min-width: 120px) and (max-width: 480px) {
+    @media screen and (max-width: 480px) {
     grid-template:
     "filtro"
     "produto";
@@ -63,73 +59,85 @@ class App extends React.Component {
       nome: 'New Horizons',
       foto: NewHorizons,
       preco: 7000,
-      id: 5
+      id: 5,
+      quantidade: 0
     },
     {
       nome: 'Voyager1',
       foto: Voyager1,
       preco: 5000,
-      id: 1
+      id: 1,
+      quantidade: 0
     },
     {
       nome: 'Hubble',
       foto: Hubble,
       preco: 15000,
-      id: 8
+      id: 8,
+      quantidade: 0
     },
     {
       nome: 'Sputnik',
       foto: Sputnik,
       preco: 3000,
-      id: 2
+      id: 2,
+      quantidade: 0
     },
     {
       nome: 'Cassini',
       foto: Cassini,
       preco: 5000,
-      id: 3
+      id: 3,
+      quantidade: 0
     },
     {
       nome: 'Onibus Espacial Challenger',
       foto: Challenger,
       preco: 20000,
-      id: 10
+      id: 10,
+      quantidade: 0
     },
     {
       nome: 'Galileo',
       foto: Galileo,
       preco: 5000,
-      id: 4
+      id: 4,
+      quantidade: 0
     },
     {
       nome: 'Módulo Lunar Apollo',
       foto: ModuloLunarApollo,
       preco: 4000,
-      id: 6
+      id: 6,
+      quantidade: 0
     },
     {
       nome: 'Opportunity',
       foto: Opportunity,
       preco: 10000,
-      id: 7
+      id: 7,
+      quantidade: 0
     },
     {
       nome: 'Estação Espacial Internacional',
       foto: EstacaoEspacialInternacional,
       preco: 12000,
-      id: 9
+      id: 9,
+      quantidade: 0
     },
     {
       nome: 'Saturno V',
       foto: SaturnoV,
       preco: 10000,
-      id: 11
+      id: 11,
+      quantidade: 0
     },
     {
       nome: 'SpaceX Crew Dragon 2',
       foto: SpaceXCrewDragon2,
       preco: 25000,
-      id: 12
+      id: 12,
+      quantidade: 0
     }
   ]
 
@@ -138,9 +146,13 @@ class App extends React.Component {
     minFilter: '',
     maxFilter: '',
     nameFilter: '',
-    productsInCart: [
-
-    ]
+    productsInCart: [{
+      nome: 'Cassini',
+      foto: Cassini,
+      preco: 5000,
+      id: 3,
+      quantidade: 1
+    }]
   }
   onChangeMinFilter = (event) => {
     this.setState({ minFilter: event.target.value })
@@ -153,7 +165,21 @@ class App extends React.Component {
     this.setState({ nameFilter: event.target.value })
   }
   onClickAddProdutoCarrinho = (produtoID) => {
-    console.log(produtoID)
+    const produppNoCarrinho = this.state.productsInCart.find(prduto => prduto.id === produtoID)
+    if (produppNoCarrinho) {
+      const novoProdutoNoCarrinho = this.state.productsInCart.map(produto => {
+        if (produto.id === produtoID) {
+          return { ...produto, quantidade: produto.quantidade + 1 }
+        }
+        return produto
+      })
+      this.setState({ productsInCart: novoProdutoNoCarrinho })
+    }
+    else {
+      const produtoAdcionado = this.arrayDeProdutos.find(prduto => prduto.id === produtoID)
+      const novoProdutoNoCarrinho = [...this.state.productsInCart, { ...produtoAdcionado, quantidade: 1 }]
+      this.setState({ productsInCart: novoProdutoNoCarrinho })
+    }
   }
   onClickLimpaFiltro = () => {
     this.setState({ minFilter: '' })
@@ -166,7 +192,6 @@ class App extends React.Component {
       <Div>
         <Header>
           <Carrinho>
-
           </Carrinho>
         </Header>
         <Main>
@@ -180,19 +205,14 @@ class App extends React.Component {
           />
           <Produtos
             arrayDeProdutos={this.arrayDeProdutos}
-
-
             minFilter={this.state.minFilter}
             maxFilter={this.state.maxFilter}
             nameFilter={this.state.nameFilter}
             addProdutoCarrinho={this.onClickAddProdutoCarrinho}
             limpaFiltro={this.onClickLimpaFiltro}
-
           />
         </Main>
-        <Footer>
-
-        </Footer>
+        <Footer />
       </Div>
     )
   }

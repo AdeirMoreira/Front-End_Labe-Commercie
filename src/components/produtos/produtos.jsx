@@ -1,7 +1,6 @@
 import React from "react";
 import { CardProdutos } from "../cardProdutos/cardProdutos";
 import styled from "styled-components";
-import '../../App.css'
 
 
 
