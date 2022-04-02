@@ -14,6 +14,7 @@ const ProdutosContainer = styled.div`
     grid-template-columns: repeat(auto-fit , minmax(220px, 260px));
     gap: 20px;
     font-family: 'Roboto', sans-serif;
+    justify-content: center;
 `
 const ConteinerOrdenacao = styled.div`
     display: flex;
