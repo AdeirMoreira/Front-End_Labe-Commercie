@@ -6,6 +6,10 @@ const Container = styled.div`
   margin: 10px;
   padding: 10px;
   grid-area: carrinho;
+  @media screen and (max-width: 850px) {
+        width: 280px;
+        justify-self: center;
+    }
 `;
 
 const ContainerFlex = styled.div`

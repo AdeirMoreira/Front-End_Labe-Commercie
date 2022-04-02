@@ -44,11 +44,12 @@ const Main = styled.main`
 
     'filtro  produto carrinho'
     /200px auto 280px;
-    @media screen and (max-width: 480px) {
+    @media screen and (max-width: 850px) {
     grid-template:
     "filtro"
     "carrinho"
-    "produto";
+    "produto"
+    /auto;
     justify-content: center;
     }
 `

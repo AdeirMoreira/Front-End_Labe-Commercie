@@ -10,7 +10,10 @@ const ContainerFiltro = styled.div`
         width: 150px;
         background-color: #E8FEFA;
     }
-
+    
+    @media screen and (max-width: 850px) {
+        text-align: center;
+    }
 `
 
 export class Filter extends React.Component {

@@ -1,4 +1,4 @@
-# __E-comercie Geek Alga Squard__
+# __E-comercie Alfa Geek Squad__
 
 ### **Projeto de E-comercie de produtos espaciais, foram implementas funcionadades de buscas e de adição e removção de produto no carrinho,**
 
