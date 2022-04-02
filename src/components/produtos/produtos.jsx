@@ -9,7 +9,6 @@ const SuperContainer = styled.section`
 `
 const ProdutosContainer = styled.div`
     padding: 20px;
-    grid-area: produto;
     display: grid;
     grid-template-columns: repeat(auto-fit , minmax(220px, 260px));
     gap: 20px;
