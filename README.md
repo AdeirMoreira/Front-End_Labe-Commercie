@@ -1,6 +1,6 @@
 # __E-comercie Alfa Geek Squad__
 
-### **Projeto de E-comercie de produtos espaciais,**
+### **Projeto de E-comercie de produtos espaciais.**
 
 #### **Funcionalidades**
 
