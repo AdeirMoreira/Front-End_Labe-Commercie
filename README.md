@@ -1,6 +1,8 @@
 # __E-comercie Alfa Geek Squad__
 
-### **Projeto de E-comercie de produtos espaciais, foram implementas funcionadades de busca por nome, preços maior que ou menor que , exibição por título ou por nome crescente ou descrescente, adição e removção de produtos no carrinho, além disso, o carrinho pode ser limpo apertando um botão e também pode ser ocultado apertando outro botão. Por fim para exibir o carrinho novamente basta clicar no icone de carrinho que acompanhará a rolagem pela pagina.**
+### **Projeto de E-comercie de produtos espaciais,**
+
+#### **Funcionalidades**
 
 <ul>
         <li>
