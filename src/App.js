@@ -139,7 +139,7 @@ class App extends React.Component {
     nameFilter: '',
     produtosNoCarrinho: [],
     total: 0,
-    mostraCarrinho: false,
+    mostraCarrinho: true,
     numeroItensCarrinho: ''
   }
   componentDidUpdate(prevProps, prevState) {
