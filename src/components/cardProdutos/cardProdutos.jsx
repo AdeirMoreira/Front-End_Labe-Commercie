@@ -10,7 +10,6 @@ const ContainerCard = styled.div`
     width: 100%;
     border: 1px solid black;
     background-color: #E8FEFA;
-   
     img {
         max-width: 300px;
         width: 100%;
@@ -56,7 +55,6 @@ const ContainerCard = styled.div`
     }
     
 `
-
 export class CardProdutos extends React.Component {
     render() {
         return (

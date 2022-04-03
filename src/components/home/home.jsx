@@ -63,7 +63,7 @@ const ConteinerOrdenacao = styled.div`
     }
     
 `
-export class Produtos extends React.Component {
+export class Home extends React.Component {
     state = {
         ordenacao: 'titulo',
         classificacao: 1
