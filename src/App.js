@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
-
 import Voyager1 from './img/Voyager.jpg'
 import Sputnik from './img/Sputnik.jpg'
 import Cassini from './img/Cassini.webp'
@@ -16,15 +14,11 @@ import Challenger from './img/Challenger.jpg'
 import SaturnoV from './img/Saturno V.jpg'
 import SpaceXCrewDragon2 from './img/SpaceX Crew Dragon 2.jpg'
 
-import { Produtos } from './components/produtos/produtos';
+import { Home } from './components/home/home';
 import Carrinho from './components/Carrinho/Carrinho';
 import { Filter } from './components/filtro/filtro';
 import Footer from './components/footer/footer';
 import Header from './components/Header/header';
-
-
-
-
 
 const Div = styled.div`
     margin: 0;
@@ -36,19 +30,18 @@ const Div = styled.div`
     flex-direction: column;
     height: 100vh;
 `
-
 const Main = styled.main`
     flex: 1 0 auto;
     display: grid;
     grid-template: 
-
     'filtro  produto carrinho'
-    /200px auto 280px;
-    @media screen and (max-width: 480px) {
+    /200px auto ${({ monstrarCarrinho }) => monstrarCarrinho ? '320px' : '0px'};
+    @media screen and (max-width: 850px) {
     grid-template:
     "filtro"
     "carrinho"
-    "produto";
+    "produto"
+    /auto;
     justify-content: center;
     }
 `
@@ -140,14 +133,30 @@ class App extends React.Component {
     }
   ]
 
-
   state = {
     minFilter: '',
     maxFilter: '',
     nameFilter: '',
     produtosNoCarrinho: [],
     total: 0,
-    // productsInCart: []
+    mostraCarrinho: true,
+    numeroItensCarrinho: ''
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.produtosNoCarrinho !== this.state.produtosNoCarrinho) {
+      localStorage.setItem('produtosNoCarrinho', JSON.stringify(this.state.produtosNoCarrinho))
+    }
+    if (prevState.numeroItensCarrinho !== this.state.numeroItensCarrinho) {
+      localStorage.setItem('numeroItensCarrinho', JSON.stringify(this.state.numeroItensCarrinho))
+    }
+    if (prevState.total !== this.state.total) {
+      localStorage.setItem('total', JSON.stringify(this.state.total))
+    }
+  }
+  componentDidMount() {
+    localStorage.getItem('produtosNoCarrinho') && this.setState({ produtosNoCarrinho: JSON.parse(localStorage.getItem('produtosNoCarrinho')) })
+    localStorage.getItem('numeroItensCarrinho') && this.setState({ numeroItensCarrinho: JSON.parse(localStorage.getItem('numeroItensCarrinho')) })
+    localStorage.getItem('total') && this.setState({ total: JSON.parse(localStorage.getItem('total')) })
   }
   onChangeMinFilter = (event) => {
     this.setState({ minFilter: event.target.value })
@@ -159,7 +168,6 @@ class App extends React.Component {
   onChangeNameFilter = (event) => {
     this.setState({ nameFilter: event.target.value })
   }
-
   adicionarAoCarrinho = (produtoId) => {
     const produtoExistenteCarrinho = this.state.produtosNoCarrinho.find((produto) => produtoId === produto.id,);
 
@@ -173,9 +181,13 @@ class App extends React.Component {
         0,
       );
 
+      let numeroItensCarrinhoAtualizado = this.state.numeroItensCarrinho
+      numeroItensCarrinhoAtualizado++
+
       this.setState({
         produtosNoCarrinho: novosProdutosCarrinho,
         total: total,
+        numeroItensCarrinho: numeroItensCarrinhoAtualizado,
       });
     } else {
       const novoProdutoCarrinho = this.arrayDeProdutos.find((produto) => produtoId === produto.id);
@@ -190,27 +202,17 @@ class App extends React.Component {
         0,
       );
 
+      let numeroItensCarrinhoAtualizado = this.state.numeroItensCarrinho;
+      numeroItensCarrinhoAtualizado++;
+
       this.setState({
         produtosNoCarrinho: novosProdutosCarrinhoAtualizados,
         total: total,
+        numeroItensCarrinho: numeroItensCarrinhoAtualizado,
       });
     }
 
   }
-  //   onClickRemoveProduto = (produtoID) => {
-  //     const produtoRemovido = this.state.productsInCart.map(produto => {
-  //       if (produto.id === produtoID) {
-  //         return {
-  //           ...produto, quantidade: produto.quantidade - 1
-  //         }
-  //       }
-  //       return produto
-  //     }).filter(produto => produto.quantidade > 0)
-  //     this.setState({ productsInCart: produtoRemovido })
-  //   }
-
-
-
   removerDoCarrinho = (produtoId) => {
     const removerProduto = this.state.produtosNoCarrinho
       .map((produto) =>
@@ -223,33 +225,24 @@ class App extends React.Component {
       0,
     );
 
-    this.setState({ produtosNoCarrinho: removerProduto, total: total });
+    let numeroItensCarrinhoAtualizado = this.state.numeroItensCarrinho;
+    this.state.numeroItensCarrinho > 1 ? numeroItensCarrinhoAtualizado-- : numeroItensCarrinhoAtualizado = '';
+
+    this.setState({
+      produtosNoCarrinho: removerProduto,
+      total: total,
+      numeroItensCarrinho: numeroItensCarrinhoAtualizado,
+    });
   };
-
-
-
-  // onClickAddProdutoCarrinho = (produtoID) => {
-  //   const produppNoCarrinho = this.state.productsInCart.find(prduto => prduto.id === produtoID)
-  //   if (produppNoCarrinho) {
-  //     const novoProdutoNoCarrinho = this.state.productsInCart.map(produto => {
-  //       if (produto.id === produtoID) {
-  //         return { ...produto, quantidade: produto.quantidade + 1 }
-  //       }
-  //       return produto
-  //     })
-  //     this.setState({ productsInCart: novoProdutoNoCarrinho })
-  //   }
-  //   else {
-  //     const produtoAdcionado = this.arrayDeProdutos.find(prduto => prduto.id === produtoID)
-  //     const novoProdutoNoCarrinho = [...this.state.productsInCart, { ...produtoAdcionado, quantidade: 1 }]
-  //     this.setState({ productsInCart: novoProdutoNoCarrinho })
-  //   }
-  // }
-
-
-
-
-
+  onClickMostraCarrinho = () => {
+    this.state.mostraCarrinho === false && this.setState({ mostraCarrinho: true })
+  }
+  onClickFecharCarrinho = () => {
+    this.state.mostraCarrinho === true && this.setState({ mostraCarrinho: false })
+  }
+  onClickLimparCarrinho = () => {
+    this.setState({ produtosNoCarrinho: [], numeroItensCarrinho: '' })
+  }
   onClickLimpaFiltro = () => {
     this.setState({ minFilter: '' })
     this.setState({ maxFilter: '' })
@@ -259,9 +252,13 @@ class App extends React.Component {
 
     return (
       <Div>
-        <Header>
-        </Header>
-        <Main>
+        <Header
+          monstrarCarrinho={this.onClickMostraCarrinho}
+          numeroItensCarrinho={this.state.numeroItensCarrinho}
+        />
+        <Main
+          monstrarCarrinho={this.state.mostraCarrinho}
+        >
           <Filter
             minFilter={this.state.minFilter}
             maxFilter={this.state.maxFilter}
@@ -270,7 +267,7 @@ class App extends React.Component {
             onChangeMaxFilter={this.onChangeMaxFilter}
             onChangeNameFilter={this.onChangeNameFilter}
           />
-          <Produtos
+          <Home
             arrayDeProdutos={this.arrayDeProdutos}
             minFilter={this.state.minFilter}
             maxFilter={this.state.maxFilter}
@@ -282,6 +279,9 @@ class App extends React.Component {
             produtosCarrinho={this.state.produtosNoCarrinho}
             total={this.state.total}
             removerDoCarrinho={this.removerDoCarrinho}
+            monstrarCarrinho={this.state.mostraCarrinho}
+            fecharCarrinho={this.onClickFecharCarrinho}
+            limpaCarrinho={this.onClickLimparCarrinho}
           />
         </Main>
         <Footer />
